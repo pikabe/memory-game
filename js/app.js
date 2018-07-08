@@ -28,6 +28,20 @@ function shuffle(array) {
 
 let shuffledIcons = shuffle(icons);
 
+for (let icon of shuffledIcons){
+  const card = document.createElement("ul");
+  card.classList.add("card");
+
+  let cardIcon = document.createElement("i");
+  cardIcon.classList.add(icon);
+
+  card.appendChild(cardIcon);
+
+  fragment.appendChild(card);
+}
+
+const container = document.getElementByClassName("deck");
+document.container.appendChild(fragment);
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
