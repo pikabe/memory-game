@@ -42,43 +42,40 @@ for (let icon of shuffledIcons) {
   card.innerHTML = `<i class="${icon}"></i>`;
   card.addEventListener("click", function() {
     if (openedCards.length === 0) {
-      card.classList.add("open", "show" );
+      card.classList.add("open", "show");
       openedCards.push(card);
       moves += 1;
-      console.log(openedCards)
 
     } else if (openedCards.length === 1) {
-      console.log('this function is reached');
-      if (card.classList.contains("open") === false ) {
+      if (card.classList.contains("open") === false) {
         card.classList.add("open", "show");
         openedCards.push(card);
         moves += 1;
-        console.log(openedCards);
+        if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+          openedCards[0].classList.add("match");
+          openedCards[1].classList.add("match");
+          matchedCards.push(openedCards[0]);
+          matchedCards.push(openedCards[1])
+        }
+      }
+
+    } else {
+      if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+        openedCards = [];
+        card.classList.add("open", "show");
+        openedCards.push(card);
+        moves += 1;
+
+      } else {
+        openedCards[0].classList.remove("open", "show");
+        openedCards[1].classList.remove("open", "show");
+        openedCards = [];;
+        card.classList.add("open", "show");
+        openedCards.push(card);
+        moves += 1;
       }
 
     }
-    else {
-       console.log('this function is reached');
-       if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
-         matchedCards.push(openedCards[0]);
-         matchedCards.push(openedCards[1]);
-         console.log(matchedCards)
-         openedCards = [];
-         card.classList.add("open", "show");
-         openedCards.push(card);
-         moves += 1;
-
-       } else {
-         openedCards[0].classList.remove("open", "show");
-         openedCards[1].classList.remove("open", "show");
-         openedCards = [];;
-         card.classList.add("open", "show");
-         openedCards.push(card);
-         moves += 1;
-         }
-
-    }
-    console.log(moves.toString());
   })
   fragment.appendChild(card);
 }
