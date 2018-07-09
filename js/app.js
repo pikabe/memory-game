@@ -15,7 +15,8 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 let openedCards = [];
 let matchedCards = [];
 let moves = 0;
-let movesContainer = document.getElementsByClassName("moves");
+let movesContainer = document.querySelector("span.moves");
+console.log(movesContainer);
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -76,8 +77,14 @@ for (let icon of shuffledIcons) {
       }
 
     }
+    let movesText =document.createTextNode(moves.toString());
+    movesContainer.removeChild(movesContainer.firstChild);
+    movesContainer.appendChild(movesText);
+
+    console.log(moves.toString());
   })
   fragment.appendChild(card);
+
 }
 
 const container = document.querySelector("ul.deck");
