@@ -14,6 +14,7 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 // Shuffle function from http://stackoverflow.com/a/2450976
 let openedCards = [];
 let matchedCards = [];
+let moves = 0;
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -39,26 +40,29 @@ for (let icon of shuffledIcons) {
   card.classList.add("card");
   card.innerHTML = `<i class="${icon}"></i>`;
   card.addEventListener("click", function() {
-    if (openedCards.length === 0 ){
-      card.classList.add("open", "show");
+    if (openedCards.length === 0) {
+      card.classList.add("open", "show","clicked" );
       openedCards.push(card);
-    }
+      moves += 1;
+      console.log(moves);
 
-    else if (openedCards.length < 2) {
-      if (card.xlassName !== "open") {
+    } else if (openedCards.length < 2) {
+      if (card.classList.contains("clicked") === false ) {
         card.classList.add("open", "show");
         openedCards.push(card);
+        moves += 1;
+        console.log(moves);
         if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
           matchedCards.push(openedCards[0]);
           matchedCards.push(openedCards[1]);
           openedCards = [];
-        }
-        else {
-          openedCards[0].classList.remove("open", "show");
+        } else {
+          openedCards[0].classList.remove("open", "show", "clicked");
           openedCards[1].classList.remove("open", "show");
           openedCards = [];
         }
       }
+
     }
 
   })
@@ -68,6 +72,7 @@ for (let icon of shuffledIcons) {
 const container = document.querySelector("ul.deck");
 container.appendChild(fragment);
 
+console.log(moves);
 
 
 
