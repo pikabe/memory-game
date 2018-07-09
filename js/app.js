@@ -12,8 +12,9 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+const fragment = document.createDocumentFragment();
 let openedCards = [];
-let matchedCards = [];
+let matchedCards = []
 let moves = 0;
 let movesContainer = document.querySelector("span.moves");
 let starsContainer = document.querySelector("ul.stars");
@@ -52,10 +53,9 @@ function starCount(moves) {
 
 }
 
+
+
 let shuffledIcons = shuffle(icons);
-
-const fragment = document.createDocumentFragment();
-
 for (let icon of shuffledIcons) {
   const card = document.createElement("li");
   card.classList.add("card");
@@ -65,6 +65,15 @@ for (let icon of shuffledIcons) {
       card.classList.add("open", "show");
       openedCards.push(card);
       moves += 1;
+      // timer turns on at first move
+      if (moves === 1) {
+        timer = setInterval(function(){
+          time +=1;
+          console.log(time)
+
+        },1000);
+
+      }
 
     } else if (openedCards.length === 1) {
       if (card.classList.contains("open") === false) {
