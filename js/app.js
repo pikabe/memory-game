@@ -16,7 +16,8 @@ let openedCards = [];
 let matchedCards = [];
 let moves = 0;
 let movesContainer = document.querySelector("span.moves");
-console.log(movesContainer);
+let starsContainer = document.querySelector("ul.stars")
+
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -31,6 +32,16 @@ function shuffle(array) {
   }
 
   return array;
+}
+
+function StarCount (moveCount) {
+  if (moveCount === 15) {
+  starsContainer.removeChild(starsContainer.firstElementChild);
+  }
+  if (moveCount === 25) {
+  starsContainer.removeChild(starsContainer.firstElementChild);
+  }
+
 }
 
 let shuffledIcons = shuffle(icons);
@@ -80,8 +91,9 @@ for (let icon of shuffledIcons) {
     let movesText =document.createTextNode(moves.toString());
     movesContainer.removeChild(movesContainer.firstChild);
     movesContainer.appendChild(movesText);
+    StarCount(moves); // removes stars depending on the number of moves
 
-    console.log(moves.toString());
+
   })
   fragment.appendChild(card);
 
@@ -106,6 +118,7 @@ container.appendChild(fragment);
 // }
 
 function checkMatch() {
+
 
 }
 /*
