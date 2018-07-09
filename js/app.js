@@ -15,6 +15,7 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 let openedCards = [];
 let matchedCards = [];
 let moves = 0;
+let movesContainer = document.getElementsByClassName("moves");
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -41,30 +42,43 @@ for (let icon of shuffledIcons) {
   card.innerHTML = `<i class="${icon}"></i>`;
   card.addEventListener("click", function() {
     if (openedCards.length === 0) {
-      card.classList.add("open", "show","clicked" );
+      card.classList.add("open", "show" );
       openedCards.push(card);
       moves += 1;
-      console.log(moves);
+      console.log(openedCards)
 
-    } else if (openedCards.length < 2) {
-      if (card.classList.contains("clicked") === false ) {
+    } else if (openedCards.length === 1) {
+      console.log('this function is reached');
+      if (card.classList.contains("open") === false ) {
         card.classList.add("open", "show");
         openedCards.push(card);
         moves += 1;
-        console.log(moves);
-        if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
-          matchedCards.push(openedCards[0]);
-          matchedCards.push(openedCards[1]);
-          openedCards = [];
-        } else {
-          openedCards[0].classList.remove("open", "show", "clicked");
-          openedCards[1].classList.remove("open", "show");
-          openedCards = [];
-        }
+        console.log(openedCards);
       }
 
     }
+    else {
+       console.log('this function is reached');
+       if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+         matchedCards.push(openedCards[0]);
+         matchedCards.push(openedCards[1]);
+         console.log(matchedCards)
+         openedCards = [];
+         card.classList.add("open", "show");
+         openedCards.push(card);
+         moves += 1;
 
+       } else {
+         openedCards[0].classList.remove("open", "show");
+         openedCards[1].classList.remove("open", "show");
+         openedCards = [];;
+         card.classList.add("open", "show");
+         openedCards.push(card);
+         moves += 1;
+         }
+
+    }
+    console.log(moves.toString());
   })
   fragment.appendChild(card);
 }
@@ -72,7 +86,7 @@ for (let icon of shuffledIcons) {
 const container = document.querySelector("ul.deck");
 container.appendChild(fragment);
 
-console.log(moves);
+
 
 
 
