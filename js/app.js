@@ -12,6 +12,9 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+let openedCards = [];
+let matchedCards = [];
+
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue, randomIndex;
@@ -30,17 +33,58 @@ function shuffle(array) {
 let shuffledIcons = shuffle(icons);
 
 const fragment = document.createDocumentFragment();
+
 for (let icon of shuffledIcons) {
   const card = document.createElement("li");
-
   card.classList.add("card");
-  
   card.innerHTML = `<i class="${icon}"></i>`;
+  card.addEventListener("click", function() {
+    if (openedCards.length === 0 ){
+      card.classList.add("open", "show");
+      openedCards.push(card);
+    }
 
+    else if (openedCards.length < 2) {
+      if (card.xlassName !== "open") {
+        card.classList.add("open", "show");
+        openedCards.push(card);
+        if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+          matchedCards.push(openedCards[0]);
+          matchedCards.push(openedCards[1]);
+          openedCards = [];
+        }
+        else {
+          openedCards[0].classList.remove("open", "show");
+          openedCards[1].classList.remove("open", "show");
+          openedCards = [];
+        }
+      }
+    }
+
+  })
   fragment.appendChild(card);
 }
+
 const container = document.querySelector("ul.deck");
 container.appendChild(fragment);
+
+
+
+
+
+
+
+// function openCard() {
+//   if ((openedCards.length <2) and ()) {
+//     (".card").on
+//
+//   }
+//
+// }
+
+function checkMatch() {
+
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
