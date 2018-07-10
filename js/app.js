@@ -17,11 +17,17 @@ let openedCards = [];
 let matchedCards = []
 let moves = 0;
 let movesContainer = document.querySelector("span.moves");
+let starNumber = 3;
 let starsContainer = document.querySelector("ul.stars");
 let timeContainer = document.querySelector("span.time");
 let time = 0;
 let timerOn = true;
 let repeatIconContainer = document.querySelector("i.fa-repeat");
+let gameEndPage = document.createElement("div");
+let body = document.querySelector("body"); // using query selector retuns a node. using e.g. documen.getElementsByClassName('className') returns a collection
+
+
+
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -48,17 +54,67 @@ function moveCountUpdate(moves) {
 function starCount(moves) {
   if (moves === 25) {
     starsContainer.removeChild(starsContainer.firstElementChild);
+    starNumber -= 1;
   }
   if (moves === 35) {
     starsContainer.removeChild(starsContainer.firstElementChild);
+    starNumber -= 1;
   }
 
 };
-function timeCountUpdate(time){
+
+function timeCountUpdate(time) {
   let gameTime = document.createTextNode(time.toString());
   timeContainer.removeChild(timeContainer.firstChild);
   timeContainer.appendChild(gameTime);
 };
+
+function refreshPage() {
+  window.location.reload();
+}
+
+function gameFinished(stars, moves, time) {
+  gameEndPage.classList.add("end-page");
+
+  let endPageTitle = document.createElement("h1")
+  let congratulationsHeading = document.createTextNode("Congratulation!!! You've won!");
+
+  endPageTitle.appendChild(congratulationsHeading);
+
+  let endPageStats = document.createElement("p");
+  let statsStars;
+  if (stars > 1) {
+     statsStars = document.createTextNode(`You earned ${stars.toString()} stars!`)
+
+  } else {
+    statsStars = document.createTextNode(`You earned ${stars.toString()} star!`)
+
+  }
+
+  let otherStats = document.createTextNode(`Moves used: ${moves.toString()},  time taken: ${time.toString()} seconds`)
+
+  endPageStats.appendChild(statsStars);
+  endPageStats.appendChild(otherStats);
+
+  let buttonText = document.createTextNode('Replay');
+  let button = document.createElement("BUTTON");
+  button.setAttribute("onClick", "refreshPage()");
+  button.appendChild(buttonText);
+
+
+
+  gameEndPage.appendChild(endPageTitle);
+  gameEndPage.appendChild(endPageStats);
+  gameEndPage.appendChild(button);
+
+  body.removeChild(body.firstElementChild);
+  body.appendChild(gameEndPage);
+
+
+
+
+
+}
 
 
 
@@ -72,8 +128,9 @@ for (let icon of shuffledIcons) {
       let timer = setInterval(function() {
         time += 1;
         timeCountUpdate(time);
-        if (matchedCards.length ===16 ){
+        if (matchedCards.length === 16) {
           clearInterval(timer);
+          gameFinished(starNumber, moves, time);
         }
       }, 1000);
     }
@@ -96,8 +153,7 @@ for (let icon of shuffledIcons) {
           openedCards[0].classList.add("match");
           openedCards[1].classList.add("match");
           matchedCards.push(openedCards[0]);
-          matchedCards.push(openedCards[1])
-          console.log(matchedCards.length);
+          matchedCards.push(openedCards[1]);
 
         }
       }
@@ -131,8 +187,8 @@ for (let icon of shuffledIcons) {
 const container = document.querySelector("ul.deck");
 container.appendChild(fragment);
 
-repeatIconContainer.addEventListener("click",function(){
-  window.location.reload();
+repeatIconContainer.addEventListener("click", function() {
+  refreshPage();
 })
 
 
