@@ -18,6 +18,7 @@ let matchedCards = []
 let moves = 0;
 let movesContainer = document.querySelector("span.moves");
 let starsContainer = document.querySelector("ul.stars");
+let timeContainer = document.querySelector("span.time");
 let time = 0;
 let timerOn = true;
 
@@ -51,7 +52,12 @@ function starCount(moves) {
     starsContainer.removeChild(starsContainer.firstElementChild);
   }
 
-}
+};
+function timeCountUpdate(time){
+  let gameTime = document.createTextNode(time.toString());
+  timeContainer.removeChild(timeContainer.firstChild);
+  timeContainer.appendChild(gameTime);
+};
 
 
 
@@ -64,7 +70,7 @@ for (let icon of shuffledIcons) {
     if (timerOn === true) {
       let timer = setInterval(function() {
         time += 1;
-        console.log(time);
+        timeCountUpdate(time);
         if (matchedCards.length ===16 ){
           clearInterval(timer);
         }
@@ -123,7 +129,6 @@ for (let icon of shuffledIcons) {
 
 const container = document.querySelector("ul.deck");
 container.appendChild(fragment);
-
 
 
 
