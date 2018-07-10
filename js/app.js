@@ -21,6 +21,7 @@ let starsContainer = document.querySelector("ul.stars");
 let timeContainer = document.querySelector("span.time");
 let time = 0;
 let timerOn = true;
+let repeatIconContainer = document.querySelector("i.fa-repeat");
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -130,8 +131,9 @@ for (let icon of shuffledIcons) {
 const container = document.querySelector("ul.deck");
 container.appendChild(fragment);
 
-
-
+repeatIconContainer.addEventListener("click",function(){
+  window.location.reload();
+})
 
 
 
