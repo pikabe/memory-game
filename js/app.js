@@ -19,7 +19,7 @@ let moves = 0;
 let movesContainer = document.querySelector("span.moves");
 let starsContainer = document.querySelector("ul.stars");
 let time = 0;
-
+let timerOn = true;
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -61,19 +61,24 @@ for (let icon of shuffledIcons) {
   card.classList.add("card");
   card.innerHTML = `<i class="${icon}"></i>`;
   card.addEventListener("click", function() {
+    if (timerOn === true) {
+      let timer = setInterval(function() {
+        time += 1;
+        console.log(time);
+        if (matchedCards.length ===16 ){
+          clearInterval(timer);
+        }
+      }, 1000);
+    }
+    timerOn = false
+
+
     if (openedCards.length === 0) {
       card.classList.add("open", "show");
       openedCards.push(card);
       moves += 1;
-      // timer turns on at first move
-      if (moves === 1) {
-        timer = setInterval(function(){
-          time +=1;
-          console.log(time)
 
-        },1000);
 
-      }
 
     } else if (openedCards.length === 1) {
       if (card.classList.contains("open") === false) {
@@ -85,6 +90,8 @@ for (let icon of shuffledIcons) {
           openedCards[1].classList.add("match");
           matchedCards.push(openedCards[0]);
           matchedCards.push(openedCards[1])
+          console.log(matchedCards.length);
+
         }
       }
 
