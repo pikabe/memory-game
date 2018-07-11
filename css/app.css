@@ -66,14 +66,14 @@ h1 {
 }
 
 .card {
+  -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
   transform: rotate(45deg);
+  -o-transform: rotate(45deg);
 }
 
-/*https://css-tricks.com/examples/ShapesOfCSS/ was used as a reference here  */
+
 
 .deck .card.open {
   transform: rotateY(0);
