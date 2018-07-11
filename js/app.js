@@ -51,7 +51,7 @@ function moveCountUpdate(moves) {
 
 }
 
-function starCount(moves) {
+function starCountUpdate(moves) {
   if (moves === 25) {
     starsContainer.removeChild(starsContainer.firstElementChild);
     starNumber -= 1;
@@ -61,13 +61,13 @@ function starCount(moves) {
     starNumber -= 1;
   }
 
-};
+}
 
 function timeCountUpdate(time) {
   let gameTime = document.createTextNode(time.toString());
   timeContainer.removeChild(timeContainer.firstChild);
   timeContainer.appendChild(gameTime);
-};
+}
 
 function refreshPage() {
   window.location.reload();
@@ -84,65 +84,61 @@ function gameFinished(stars, moves, time) {
   let endPageStats = document.createElement("p");
   let statsStars;
   if (stars > 1) {
-     statsStars = document.createTextNode(`You earned ${stars.toString()} stars!`)
+    statsStars = document.createTextNode(`You earned ${stars.toString()} stars!`);
 
   } else {
-    statsStars = document.createTextNode(`You earned ${stars.toString()} star!`)
+    statsStars = document.createTextNode(`You earned ${stars.toString()} star!`);
 
   }
 
-  let otherStats = document.createTextNode(`Moves used: ${moves.toString()},  time taken: ${time.toString()} seconds`)
-
+  let moveStats = document.createTextNode(`Moves used: ${moves.toString()}`);
+  let timeStats = document.createTextNode(` time taken: ${time.toString()} seconds`)
+  let lineBreakOne = document.createElement("br");
+  let lineBreakTwo = document.createElement("br");
   endPageStats.appendChild(statsStars);
-  endPageStats.appendChild(otherStats);
+  endPageStats.appendChild(lineBreakOne);
+  endPageStats.appendChild(moveStats);
+  endPageStats.appendChild(lineBreakTwo);
+  endPageStats.appendChild(timeStats);
 
   let buttonText = document.createTextNode('Replay');
   let button = document.createElement("BUTTON");
   button.setAttribute("onClick", "refreshPage()");
   button.appendChild(buttonText);
 
-
-
   gameEndPage.appendChild(endPageTitle);
   gameEndPage.appendChild(endPageStats);
-  gameEndPage.appendChild(button);
+  gameEndPage.appendChild(button); //Appends the stats to container before it's appended to the body.
 
   body.removeChild(body.firstElementChild);
   body.appendChild(gameEndPage);
 
-
-
-
-
 }
 
-
-
 let shuffledIcons = shuffle(icons);
+
 for (let icon of shuffledIcons) {
   const card = document.createElement("li");
   card.classList.add("card");
   card.innerHTML = `<i class="${icon}"></i>`;
   card.addEventListener("click", function() {
-    if (timerOn === true) {
+    if (timerOn === true) { //This starts timer once the first card is clicked.
       let timer = setInterval(function() {
         time += 1;
         timeCountUpdate(time);
-        if (matchedCards.length === 16) {
+        if (matchedCards.length === 16) { //Once all cards are matched, timer stops. Results page created using gameFinished.
           clearInterval(timer);
           gameFinished(starNumber, moves, time);
         }
       }, 1000);
     }
-    timerOn = false
-
+    timerOn = false // timer on used to make sure setInterval isn't called multiple times. setInterval called the first time the a card is clicked.
 
     if (openedCards.length === 0) {
+
       card.classList.add("open", "show");
       openedCards.push(card);
       moves += 1;
-
-
 
     } else if (openedCards.length === 1) {
       if (card.classList.contains("open") === false) {
@@ -158,7 +154,7 @@ for (let icon of shuffledIcons) {
         }
       }
 
-    } else {
+    } else { //When two cards are open at onece.
       if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
         openedCards = [];
         card.classList.add("open", "show");
@@ -176,7 +172,7 @@ for (let icon of shuffledIcons) {
 
     }
     moveCountUpdate(moves);
-    starCount(moves); // removes stars depending on the number of moves
+    starCountUpdate(moves); // removes stars depending on the number of moves
 
 
   })
@@ -202,10 +198,6 @@ repeatIconContainer.addEventListener("click", function() {
 //
 // }
 
-function checkMatch() {
-
-
-}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
