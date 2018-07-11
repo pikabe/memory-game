@@ -14,7 +14,7 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 // Shuffle function from http://stackoverflow.com/a/2450976
 const fragment = document.createDocumentFragment();
 let openedCards = [];
-let matchedCards = []
+let matchedCards = [];
 let moves = 0;
 let movesContainer = document.querySelector("span.moves");
 let starNumber = 3;
@@ -24,7 +24,7 @@ let time = 0;
 let timerOn = true;
 let repeatIconContainer = document.querySelector("i.fa-repeat");
 let gameEndPage = document.createElement("div");
-let body = document.querySelector("body"); // using query selector retuns a node. using e.g. documen.getElementsByClassName('className') returns a collection
+let body = document.querySelector("body"); // Note to self - using query selector retuns a node. using e.g. documen.getElementsByClassName('className') returns a collection
 
 
 
