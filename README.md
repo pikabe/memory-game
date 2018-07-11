@@ -9,7 +9,7 @@ Installation
 
 To download this game,
 1) Click the Clone or Download button then Download Zip.
-2) Once downloaded open the file and click on the index.html file to open the game on your browser.
+2) Once downloaded, open the file and click on the index.html file to open the game on your browser.
 
 
 How to play
