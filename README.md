@@ -18,6 +18,6 @@ The aim of the game is to find all the Matching pairs of the icons.
 1) Click on the cards to reveal their respective icons.
 The timer at the bottom of the page will start once the first card is clicked.
 
-2) You can choose two cards at a time. If the chosen cards have matching icons then a match has been found and the matching cards will remain open. Continue to find matched until all the cards remain open to win the game.
+2) You can choose two cards at a time. If the chosen cards have matching icons then a match has been found and the matching cards will remain open. Continue to find matched pairs until all the cards remain open to win the game.
 
 3) Find all the matches in as few moves as possible.
