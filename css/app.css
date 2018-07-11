@@ -40,8 +40,6 @@ h1 {
   width: 660px;
   min-height: 680px;
   background: linear-gradient(160deg, #87CEFA 0%, #B0C4DE 100%);
-  /* background: linear-gradient(160deg, #CD853F 0%, #aa7ecd 100%); */
-  /* background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%); */
   padding: 32px;
   border-radius: 10px;
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -75,7 +73,7 @@ h1 {
   transform: rotate(45deg);
 }
 
- /*https://css-tricks.com/examples/ShapesOfCSS/ was used as a reference here  */
+/*https://css-tricks.com/examples/ShapesOfCSS/ was used as a reference here  */
 
 .deck .card.open {
   transform: rotateY(0);
